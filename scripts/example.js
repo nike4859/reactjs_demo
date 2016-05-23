@@ -14,7 +14,8 @@ var CommentList = React.createClass({
 	render: function(){
 		return(
 			<div className = "commentList">
-				Hello, world! I am a CommentList.
+				<Comment author="Pete Hunt">This is one comment</Comment>
+				<Comment author="Jordan Walke">This is *another* comment</Comment>
 			</div>
 		);
 	}
@@ -35,9 +36,9 @@ var Comment = React.createClass({
 		return(
 			<div className="comment">
 				<h2 className="commentAuthor">
-					{this.this.props.author}
+					{this.props.author}
 				</h2>
-				{this.this.props.children}
+				{this.props.children}
 			</div>
 		);
 	}
