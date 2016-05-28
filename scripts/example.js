@@ -17,6 +17,12 @@ var CommentBox = React.createClass({
 		});
 	},
 	handleCommentSubmit: function(comment){
+		//optimistic updates ,先把資料更新至UI上，再執行送出
+		var comments = this.state.data;
+		comment.id = Date.now();//臨時給一個ID，此範例給是用時間
+		var newComments = comments.concat([comment]);//串接資料
+		this.setState({data: newComments});//把佔存資料存入state
+		
 		$.ajax({
 			url: this.props.url,
 			dataType: 'json',
@@ -26,6 +32,7 @@ var CommentBox = React.createClass({
 				this.setState({data:data});
 			}.bind(this),
 			error: function(xhr, status, err){
+				this.setState({data: comments});//發生錯誤就還原回來
 				console.error(this.props.url, status, err.toString());
 			}.bind(this)
 		});
